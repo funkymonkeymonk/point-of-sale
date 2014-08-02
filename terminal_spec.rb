@@ -34,7 +34,7 @@ describe Terminal do
 
 
   context "with product prices loaded" do
-    products = {'A' => [2,4,7], 'B' => [12,1,0], 'C' => [1.25,6,6], 'D' => [0.15,1,0]}
+    products = {'A' => [2,4,7], 'B' => [12], 'C' => [1.25,6,6], 'D' => [0.15]}
 
     it "can accept a hash of pricing data." do
       term = Terminal.new
