@@ -21,11 +21,10 @@ describe Terminal do
       expect(term.total).to eq(2)
     end
 
-    it "deducts a bulk discount when the bulk quantity of an item has been reached" do
-      term.scan('A')
-      term.scan('A')
-      term.scan('A')
-      expect(term.total).to eq(7)
+    it "deducts bulk discounts when the bulk quantity of an item has been reached" do
+      7.times { term.scan('A') }
+      expect(term.total).to eq(20)
     end
+
   end
 end
