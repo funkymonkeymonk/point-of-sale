@@ -25,5 +25,10 @@ describe Terminal do
       10.times { term.scan('A') }
       expect(term.total).to eq(20)
     end
+
+    it "stores new products with no bulk discounts." do
+      term.add_product('B',12)
+      expect(term.get_products).to eql({'A' => [2,4,1], 'B' => [12,1,0]})
+    end
   end
 end
