@@ -30,11 +30,54 @@ describe Terminal do
       term.add_product('B',12)
       expect(term.get_products).to eql({'A' => [2,4,1], 'B' => [12,1,0]})
     end
+  end
+
+
+  context "with product prices loaded" do
+    products = {'A' => [2,4,1], 'B' => [12,1,0], 'C' => [1.25,6,6], 'D' => [0.15,1,0]}
 
     it "can accept a hash of pricing data." do
-      products = {'A' => [2,4,1], 'B' => [12,1,0], 'C' => [1.25,6,6], 'D' => [0.15,1,0]}
+      term = Terminal.new
       term.set_pricing(products)
       expect(term.get_products).to eql({'A' => [2,4,1], 'B' => [12,1,0], 'C' => [1.25,6,6], 'D' => [0.15,1,0]})
     end
+
+  
+    it "scans ABCDABAA and calculates the total as 32.40" do
+      term = Terminal.new
+      term.set_pricing(products)
+      term.scan('A')
+      term.scan('B')
+      term.scan('C')
+      term.scan('D')
+      term.scan('A')
+      term.scan('B')
+      term.scan('A')
+      term.scan('A')
+      expect(term.total).to eq(32.40)
+    end
+
+    it "scans CCCCCCC and calculates the total as 7.25" do
+      term = Terminal.new
+      term.set_pricing(products)
+      term.scan('C')
+      term.scan('C')
+      term.scan('C')
+      term.scan('C')
+      term.scan('C')
+      term.scan('C')
+      term.scan('C')
+      expect(term.total).to eq(7.25)
+    end
+
+    it "scans ABCD and calculates the total as 15.40" do
+      term = Terminal.new
+      term.set_pricing(products)
+      term.scan('A')
+      term.scan('B')
+      term.scan('C')
+      term.scan('D')
+      expect(term.total).to eq(15.40)
+    end 
   end
 end
