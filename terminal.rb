@@ -12,10 +12,18 @@ class Terminal
   end
 
   def total
-    @cart.reduce(0) do |sum, code|
+    subtotal, discount = 0, 0
+
+    # Calculate total of cart
+    subtotal = @cart.reduce(0) do |sum, code|
       sum + @products[code][@PRICE]
     end
+    # Calculate discount
+    discount = @products.keys.reduce(0) do |sum, code|
+      sum + (@cart.count(code) / @products[code][@BULK_QUANTITY]) * @products[code][@BULK_DISCOUNT]
+    end
 
+    subtotal - discount
   end
 
   def add_product(code, price, bulk_quantity, bulk_discount)
