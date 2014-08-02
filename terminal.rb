@@ -45,6 +45,7 @@ class Terminal
   end
 
   def set_pricing(new_products)
-    @products = new_products
+    @products.clear
+    new_products.each {|key, value| add_product(key, *value)}
   end
 end
