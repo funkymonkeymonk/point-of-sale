@@ -43,4 +43,8 @@ class Terminal
   def to_s
     "products:#@products, cart:#@cart"
   end
+
+  def set_pricing(new_products)
+    @products = new_products
+  end
 end
