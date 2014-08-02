@@ -13,7 +13,7 @@ describe Terminal do
     it "stores new products by their code, price, bulk quantity, and bulk discount" do
       # Product A costs 2 dollars each or 4 for $7
       term.add_product('A',2,4,7)
-      expect(term.get_products).to eql({'A' => [2,4,7]}) 
+      expect(term.get_products).to eql({'A' => [2,4,1]}) 
     end
 
     it "scans an item and adds the price to the total" do
