@@ -2,15 +2,22 @@
 
 require_relative 'terminal'
 
-describe Terminal, "#total" do
-  it "returns 0 for total of a new terminal" do
-    term = Terminal.new
-    expect(term.total).to equal(0)
+describe Terminal do
+
+  term = Terminal.new
+
+  it "has total of 0 for a new terminal" do
+    expect(term.total).to eq(0)
   end
+
+  it "stores new products by their code, price, bulk quantity, and bulk discount" do
+    # Product A costs 2 dollars each or 4 for $7
+    term.add_product('A',2,4,7)
+    expect(term.get_products).to eql({'A' => [2,4,7]}) 
+  end
+
+  it "scans an item and adds the price to the total" do
+    term.scan('A')
+    expect(term.total).to eq(2)
+  end  
 end
-    
-
-
-#Scan these items in this order: ABCDABAA; Verify the total price is $32.40.
-#Scan these items in this order: CCCCCCC; Verify the total price is $7.25.
-#Scan these items in this order: ABCD; Verify the total price is $15.40.
