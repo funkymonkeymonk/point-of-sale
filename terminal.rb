@@ -1,12 +1,12 @@
 # terminal.rb
 
 class Terminal
-  def initialize()
-    # Positional Constants for product array
-    @PRICE = 0
-    @BULK_QUANTITY = 1
-    @BULK_DISCOUNT = 2
+  # Positional Constants for product array
+  PRICE = 0
+  BULK_QUANTITY = 1
+  BULK_DISCOUNT = 2
 
+  def initialize()
     @products = {}
     @cart = []
   end
@@ -16,27 +16,31 @@ class Terminal
 
     # Calculate total of cart
     subtotal = @cart.reduce(0) do |sum, code|
-      sum + @products[code][@PRICE]
+      sum + @products[code][PRICE]
     end
     # Calculate discount
     discount = @products.keys.reduce(0) do |sum, code|
-      sum + (@cart.count(code) / @products[code][@BULK_QUANTITY]) * @products[code][@BULK_DISCOUNT]
+      sum + (@cart.count(code) / @products[code][BULK_QUANTITY]) * @products[code][BULK_DISCOUNT]
     end
 
     subtotal - discount
   end
 
-  def add_product(code, price, bulk_quantity, bulk_discount)
+  def add_product(code, price, bulk_quantity = 1, bulk_discount = price)
     # Not certain if I should leave each product as an array or if I should make
     # this it's own very simple class
     @products[code] = [price, bulk_quantity, price * bulk_quantity - bulk_discount]
   end
 
-  def get_products()
+  def get_products
     @products
   end
 
   def scan(code)
     @cart << code
+  end
+
+  def to_s
+    "products:#@products, cart:#@cart"
   end
 end
