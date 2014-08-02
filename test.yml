@@ -1,0 +1,8 @@
+testPointOfSale:
+  build: .
+  volumes: 
+    - .:/home/pos_user/pos/
+  hostname: pointofsale
+  working_dir: /home/pos_user/pos/
+  user: pos_user
+  command: rspec terminal_spec.rb
