@@ -30,5 +30,11 @@ describe Terminal do
       term.add_product('B',12)
       expect(term.get_products).to eql({'A' => [2,4,1], 'B' => [12,1,0]})
     end
+
+    it "can accept a hash of pricing data." do
+      products = {'A' => [2,4,1], 'B' => [12,1,0], 'C' => [1.25,6,6], 'D' => [0.15,1,0]}
+      term.set_pricing(products)
+      expect(term.get_products).to eql({'A' => [2,4,1], 'B' => [12,1,0], 'C' => [1.25,6,6], 'D' => [0.15,1,0]})
+    end
   end
 end
