@@ -39,7 +39,7 @@ describe Terminal do
     it "can accept a hash of pricing data." do
       term = Terminal.new
       term.set_pricing(products)
-      expect(term.get_products).to eql({'A' => [2,4,1], 'B' => [12,1,0], 'C' => [1.25,6,1.25], 'D' => [0.15,1,0]})
+      expect(term.get_products).to eql({'A' => [2,4,1], 'B' => [12,1,0], 'C' => [1.25,6,1.50], 'D' => [0.15,1,0]})
     end
 
   
